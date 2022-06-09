@@ -1,0 +1,7 @@
+{
+  "name": "ScheduleITQuick",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

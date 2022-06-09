@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-padding" *ngIf="loadedData">
+    <h3 style="text-align: center">Block days</h3>
+    <ion-calendar [(ngModel)]="date"
+                  [type]="type"
+                  [options]="optionsMulti"
+                  (select)="myfunc($event)"
+                  [format]="'YYYY-MM-DD'">
+    </ion-calendar>
+  </div>
+  <ion-modal [isOpen]="openModal">
+    <ng-template>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title>Block details</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content fullscreen>
+        <form method="post" [formGroup]="form" (submit)="submitLeaveReason()">
+          <ion-item style="margin: 10px 0;">
+            <ion-label position="floating">Reason</ion-label>
+            <ion-textarea formControlName="title"></ion-textarea>
+            <span slot="error" *ngIf="form.get('title').invalid && (form.get('title').dirty || form.get('title').touched)">Field is required</span>
+          </ion-item>
+          <ion-button expand="block" type="submit" color="primary">Save</ion-button>
+          <ion-button expand="block" type="button" color="danger" *ngIf="form.value.id" (click)="deleteLeaveReason(form.value.id)">Delete</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

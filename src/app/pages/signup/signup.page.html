@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="login"
+        icon="chevron-back-outline">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img src="assets/img/pivLogo.png" style="height: 15%; margin: 0 auto;"></ion-img>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Register
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form method="post" (submit)="registerFormSubmit()" [formGroup]="signupForm">
+        <ion-item style="margin: 10px 0;" formGroupName="user">
+          <ion-label position="floating">First name</ion-label>
+          <ion-input type="text" formControlName="first_name"></ion-input>
+          <span slot="error" *ngIf="signupForm.get('user').get('first_name').invalid && (signupForm.get('user').get('first_name').dirty || signupForm.get('user').get('first_name').touched)">First name is required</span>
+        </ion-item>
+        <ion-item style="margin: 10px 0;" formGroupName="user">
+          <ion-label position="floating">Last name</ion-label>
+          <ion-input type="text" formControlName="last_name"></ion-input>
+          <span slot="error" *ngIf="signupForm.get('user').get('last_name').invalid && (signupForm.get('user').get('last_name').dirty || signupForm.get('user').get('last_name').touched)">Last name is required</span>
+        </ion-item>
+        <ion-item style="margin: 10px 0;" formGroupName="user">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input type="text" formControlName="username"></ion-input>
+          <span slot="error" *ngIf="signupForm.get('user').get('username').invalid && (signupForm.get('user').get('username').dirty || signupForm.get('user').get('username').touched)">Username is required</span>
+        </ion-item>
+        <ion-item style="margin: 10px 0;" formGroupName="user">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;" formGroupName="user">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;" formGroupName="user">
+          <ion-label position="floating">Re enter password</ion-label>
+          <ion-input type="password" formControlName="password2"></ion-input>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;">
+          <ion-label position="floating">phone number</ion-label>
+          <ion-input type="text" formControlName="phone_number"></ion-input>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;">
+          <ion-checkbox slot="start" color="danger" (ionChange)="changeAvail($event)"></ion-checkbox>
+          <ion-label>Available</ion-label>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;">
+          <ion-label position="floating">ZIP code</ion-label>
+          <ion-input type="text" formControlName="zip_code"></ion-input>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;">
+          <ion-label position="floating">State</ion-label>
+          <ion-input type="text" formControlName="state"></ion-input>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;">
+          <ion-label position="floating">City</ion-label>
+          <ion-input type="text" formControlName="city"></ion-input>
+        </ion-item>
+        <ion-item style="margin: 0 0 10px 0;" formGroupName="address">
+          <ion-label position="floating">Address</ion-label>
+          <ion-input type="text" id="addrss" formControlName="place"></ion-input>
+        </ion-item>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+          <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="reLocateAddress($event)"></agm-marker>
+        </agm-map>
+        <ion-button expand="block" type="submit" color="primary">Register</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

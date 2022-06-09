@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-img src="assets/img/pivLogo.png"
+           style="height: 30%; margin: 0 auto;"></ion-img>
+  <form method="post" [formGroup]="loginForm" (submit)="loginFormSubmit()" (keyup.enter)="loginFormSubmit()">
+    <ion-item style="margin: 10px">
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username" autofocus></ion-input>
+      <span slot="error" *ngIf="loginForm.get('username').invalid && (loginForm.get('username').dirty || loginForm.get('username').touched)">Username is required</span>
+    </ion-item>
+    <ion-item style="margin:10px">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+      <span slot="error" *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)">Password is required</span>
+    </ion-item>
+    <ion-button style="margin: 0 10px;" expand="block" type="submit" color="primary">Login</ion-button>
+    <div style="text-align: center; margin: 10px 0;">
+      <a (click)="router.navigateByUrl('/forget-password')">Forgot password</a>
+    </div>
+  </form>
+  <div style="position: fixed; width: 100%; bottom: 30px; text-align: center;">
+    <span>Don't have account? </span><a style="margin-top: 10px;" (click)="router.navigateByUrl('/signup')">Register</a>
+  </div>
+</ion-content>

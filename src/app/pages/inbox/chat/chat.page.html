@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="dashboard/inbox"
+        icon="chevron-back-outline">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #scrollElement [scrollEvents]="true">
+  <ion-grid class="messages-container">
+    <ion-row *ngFor="let chat of chats" style="margin: 5px 0;">
+      <ion-col>
+        <div [class]="chat.receiver.username===currentUser.user.username?'ion-text-start':'ion-text-end'">
+          <span [style.background-color]="chat.receiver.username===currentUser.user.username?'#005cff94':'#dedede'"
+                [style.color]="chat.receiver.username===currentUser.user.username?'#ffffff':'#000000'"
+                [style.margin-right]="chat.receiver.username===currentUser.user.username?'50px':'0'"
+                [style.margin-left]="chat.receiver.username!==currentUser.user.username?'50px':'0'"
+                style="padding: 7px;border-radius: 10px;letter-spacing: 0; line-height: 30px;display: block; text-align: justify;">{{chat.text}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <form method="POST" *ngIf="chatForm" [formGroup]="chatForm" (submit)="submitChat()">
+    <ion-textarea placeholder="Write your message here" formControlName="text"></ion-textarea>
+    <ion-button type="submit">
+      <ion-icon name="send-outline"></ion-icon>
+    </ion-button>
+  </form>
+</ion-footer>

@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="dashboard/profile"
+        icon="chevron-back-outline">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit profile</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="primary" type="button" (click)="saveForm()" size="small">
+        <ion-icon name="checkmark-done-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="form" [formGroup]="form">
+    <ion-list>
+      <ion-item formGroupName="user">
+        <ion-label position="floating">First name</ion-label>
+        <ion-input type="text" formControlName="first_name"></ion-input>
+      </ion-item>
+      <ion-item formGroupName="user">
+        <ion-label position="floating">Last name</ion-label>
+        <ion-input type="text" formControlName="last_name"></ion-input>
+      </ion-item>
+      <ion-item formGroupName="user">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Phone number</ion-label>
+        <ion-input type="text" formControlName="phone_number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Available</ion-label>
+        <ion-toggle slot="end" [checked]="form.value.available" (ionChange)="changeAvail($event)"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">ZIP code</ion-label>
+        <ion-input type="text" formControlName="zip_code"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">City</ion-label>
+        <ion-input type="text" formControlName="city"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">State</ion-label>
+        <ion-input type="text" formControlName="state"></ion-input>
+      </ion-item>
+      <ion-item formGroupName="address">
+        <ion-label position="floating">Address</ion-label>
+        <ion-input type="text" id="addrss" formControlName="place"></ion-input>
+      </ion-item>
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+        <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (dragEnd)="reLocateAddress($event)"></agm-marker>
+      </agm-map>
+    </ion-list>
+  </form>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Validate OTP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form method="post" [formGroup]="validateOTPForm" (submit)="submitOTPValidationForm()">
+        <ion-item style="margin: 10px">
+          <ion-label position="floating">OTP</ion-label>
+          <ion-input type="text" formControlName="otp" autofocus required></ion-input>
+        </ion-item>
+        <ion-button style="margin: 0 10px;" expand="block" type="submit" color="primary" [disabled]="disableForm">Validate</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

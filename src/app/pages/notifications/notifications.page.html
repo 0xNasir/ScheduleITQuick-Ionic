@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-virtual-scroll [approxItemHeight]="'20px'" [items]="notifications">
+      <ion-item *virtualItem="let item">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label *ngIf="item.type==='booked'" color="primary" style="font-size: 20px;" [class.seen]="item.seen"
+                         [class.unseen]="!item.seen">New Booking
+              </ion-label>
+              <ion-label *ngIf="item.type!=='booked'" color="danger" style="font-size: 20px;" [class.seen]="item.seen"
+                         [class.unseen]="!item.seen">Cancel Booking
+              </ion-label>
+              <ion-note *ngIf="item.type==='booked'" [class.seen]="item.seen" [class.unseen]="!item.seen">
+                <strong>{{ item.sender.first_name }} {{item.sender.last_name}}</strong> booked you for a customer
+              </ion-note>
+              <ion-note *ngIf="item.type!=='booked'" [class.seen]="item.seen" [class.unseen]="!item.seen">
+                <strong>{{ item.sender.first_name }} {{item.sender.last_name}}</strong> cancel the booking
+              </ion-note>
+            </ion-col>
+            <ion-col class="ion-text-end">
+              <ion-button fill="clear" *ngIf="!item.seen" (click)="handleSeen(item)">
+                <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" (click)="router.navigateByUrl('/dashboard/inbox/'+item.sender.username)">
+                <ion-icon slot="icon-only" name="chatbubble-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+  </ion-list>
+</ion-content>
